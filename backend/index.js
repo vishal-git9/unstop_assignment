@@ -2,7 +2,9 @@ const express = require("express")
 const connection = require("./config/db")
 const bookingRouter = require("./routes/book.route")
 require("dotenv").config()
+const cors = require("cors")
 const app = express()
+app.use(cors())
 app.use(express.json())
 
 

@@ -12,6 +12,16 @@ bookingRouter.get("/",async(req,res)=>{
         res.status(400).send({msg:"couldn't fetch data"})
     }
 })
+
+bookingRouter.get("/unBooked",async(req,res)=>{
+    try {
+        const coachData = await bookingModel.find({isBooked:false})
+
+        res.status(200).send({msg:"here is all the unbooked data",coachData})
+    } catch (error) {
+        res.status(400).send({msg:"couldn't fetch data"})
+    }
+})
 bookingRouter.post("/postSeats",async(req,res)=>{
     const ticketReq = req.body
     try {
@@ -23,7 +33,6 @@ bookingRouter.post("/postSeats",async(req,res)=>{
 })
 bookingRouter.patch("/bookSeats",async(req,res)=>{
     const ticketReq = req.body
-    console.log(ticketReq)
     try {
         const coachData = await bookingModel.updateMany({_id:{$in:[...ticketReq]}},{$set:{isBooked:true}},{multi:true})
         res.status(201).send({msg:"ticekts booked succesfully"})
