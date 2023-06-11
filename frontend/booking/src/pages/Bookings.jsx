@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Seats } from '../components/seats'
-import { Center, Container, Heading, Spinner } from '@chakra-ui/react'
+import { Box, Center, Container, HStack, Heading, Spinner, Text } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getTicketsAction } from '../redux/tickets/tickets.actions'
 
@@ -14,8 +14,14 @@ export const Bookings = () => {
     dispatch(getTicketsAction())
   },[dispatch])
   return (
-    <Container display={"flex"} gap={"10px"}flexDirection={"column"} pb={10}>
+    <Container display={"flex"} gap={"30px"} flexDirection={"column"} pb={10}>
         <Heading>Seats</Heading>
+        <HStack justifyContent={"center"}>
+        <Box width={50} height={50} bgColor={"green"} fontSize={"sm"}></Box>
+        <Text>Booked</Text>
+        <Box width={50} height={50} border={"1px solid #9AC6CF "}></Box>
+        <Text>Not Booked</Text>
+        </HStack>
         {
           loading ? <Center><Spinner/></Center> : <Seats data={ticketsData}/>
         }

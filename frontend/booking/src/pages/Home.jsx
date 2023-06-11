@@ -28,6 +28,7 @@ export const Home = () => {
         const res = await getUnbookedData()
         const ids =  closeBook(res,TicketCount)
         dispatch(bookTicketsAction(ids))
+        setTicketCount("")
 
         if(error){
             toast({
