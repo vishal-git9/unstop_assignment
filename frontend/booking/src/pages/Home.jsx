@@ -2,11 +2,14 @@ import React, { useState } from 'react'
 import { Input } from '../components/input'
 import "../styles/home.css"
 import { Heading, useToast } from '@chakra-ui/react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getUnbookedData } from '../redux/tickets/tickets.api'
 import { closeBook } from '../logic_functions/booking'
+import { bookTicketsAction } from '../redux/tickets/tickets.actions'
 export const Home = () => {
     const [TicketCount,setTicketCount] = useState(0)
+
+    const {error} = useSelector((store)=>store)
     const toast = useToast()
     const dispatch = useDispatch()
     const handleTicketCount = (e)=>{
@@ -23,8 +26,24 @@ export const Home = () => {
             return;
         }
         const res = await getUnbookedData()
-        console.log(res)
-        closeBook(res,TicketCount)
+        const ids =  closeBook(res,TicketCount)
+        dispatch(bookTicketsAction(ids))
+
+        if(error){
+            toast({
+                position:"top",
+                duration:"3000",
+                status:"error",
+                description:"Please try later server is not responding"
+            })
+        }else{
+            toast({
+                position:"top",
+                duration:"3000",
+                status:"success",
+                description:"Tickets booked successfully"
+            })
+        }
     }
   return (
     <div className='Home_css_container'>

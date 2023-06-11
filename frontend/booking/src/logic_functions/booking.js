@@ -3,9 +3,9 @@ export const closeBook = (data, slot) => {
   let start = null;
   let end = null;
   let idsArray = []
+  console.log(data)
   for (let i = 0; i <= data.length - slot; i++) {
     let diff = data[(i + slot - 1)].seatNo - data[i].seatNo;
-    console.log(diff)
     if (diff < min) {
       min = diff;
       start = i;
@@ -13,10 +13,15 @@ export const closeBook = (data, slot) => {
     }
   }
 
-  for (start = 0; start <= end; start++) {
+//   [3,5,6,7]
 
+  while (start<=end) {
     idsArray.push(data[start]._id)
+    start++
   }
+
+  console.log(start)
+  console.log(end)
 
   console.log(idsArray);
   return idsArray
