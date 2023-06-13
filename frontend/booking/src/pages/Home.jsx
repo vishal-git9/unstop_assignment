@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { Input } from '../components/input'
 import "../styles/home.css"
-import { Heading, useToast } from '@chakra-ui/react'
+import { Center, Heading, Spinner, Text, useToast } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUnbookedData } from '../redux/tickets/tickets.api'
 import { closeBook } from '../logic_functions/booking'
 import { bookTicketsAction } from '../redux/tickets/tickets.actions'
 export const Home = () => {
     const [TicketCount,setTicketCount] = useState(0)
-
+    const [seats,setSeats] = useState("")
     const {error} = useSelector((store)=>store)
+    const {loading} = useSelector((store)=>store)
     const toast = useToast()
     const dispatch = useDispatch()
     const handleTicketCount = (e)=>{
@@ -26,9 +27,10 @@ export const Home = () => {
             return;
         }
         const res = await getUnbookedData()
-        const ids =  closeBook(res,TicketCount)
-        dispatch(bookTicketsAction(ids))
+        const {idsArray,seatNumber} =  closeBook(res,TicketCount)
+        dispatch(bookTicketsAction(idsArray))
         setTicketCount("")
+        setSeats(seatNumber)
 
         if(error){
             toast({
@@ -49,7 +51,9 @@ export const Home = () => {
   return (
     <div className='Home_css_container'>
         <Heading>Book your tickets</Heading>
-        <Input onchange={handleTicketCount} submitTicket={handleTicketSubmit}/>
+        <Input count={TicketCount} onchange={handleTicketCount} submitTicket={handleTicketSubmit}/>
+        {loading && <Center><Spinner/></Center>}
+        {seats.length>0 && <Text> you have booked {seats} seats</Text>}
     </div>
   )
 }

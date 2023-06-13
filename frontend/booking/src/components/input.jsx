@@ -7,7 +7,7 @@ export const Input = ({onchange,count,submitTicket}) => {
         className="input"
         id="tickets"
         name="tickets"
-        value={count}
+        value={count || ""}
         placeholder="Enter Tickets Count"
         autoComplete="off"
         onChange={onchange}

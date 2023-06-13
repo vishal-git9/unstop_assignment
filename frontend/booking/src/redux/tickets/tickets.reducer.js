@@ -1,4 +1,4 @@
-import { GET_TICKETS_ERROR, GET_TICKETS_LOADING, GET_TICKETS_SUCCESS, PATCH_TICKETS_ERROR, PATCH_TICKETS_LOADING, PATCH_TICKETS_SUCCESS } from "./tickets.types"
+import { GET_TICKETS_ERROR, GET_TICKETS_LOADING, GET_TICKETS_SUCCESS, PATCH_TICKETS_ERROR, PATCH_TICKETS_LOADING, PATCH_TICKETS_SUCCESS, RESET_TICKETS_ERROR, RESET_TICKETS_LOADING, RESET_TICKETS_SUCCESS } from "./tickets.types"
 
 const intialState = {
     tickets:[],
@@ -37,6 +37,21 @@ export const ticketReducer = (state=intialState,{type,payload})=>{
         case PATCH_TICKETS_SUCCESS:{
             return{
                 ...state,loading:false,error:false
+            }
+        }
+        case RESET_TICKETS_SUCCESS:{
+            return{
+                ...state,loading:false,error:false,tickets:payload
+            }
+        }
+        case RESET_TICKETS_ERROR:{
+            return{
+                ...state,loading:false,error:true
+            }
+        }
+        case RESET_TICKETS_LOADING:{
+            return{
+                ...state,loading:true
             }
         }
 
