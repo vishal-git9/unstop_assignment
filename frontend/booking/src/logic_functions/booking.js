@@ -1,11 +1,7 @@
 export const closeBook = (data, slot) => {
-  if(data.length<slot){
-    return `only ${data.length} seats are left`
-  }
   let idsArray = []
   let seatNumber = ""
   const rowArr = ["row",0,0,0,0,0,0,0,0,0,0,0,0]
-  console.log(data)
   for (let i = 0; i < data.length; i++) {
     rowArr[Math.ceil(data[i].seatNo/7)]++
   }
@@ -21,15 +17,12 @@ export const closeBook = (data, slot) => {
     return {idsArray,seatNumber}
   }
 
-  console.log(start,end)
-
   // if there is a row wise seats available
   while (start<=end) {
     idsArray.push(data[start]._id)
     seatNumber+= data[start].seatNo + " "
     start++
   }
-  console.log(idsArray);
   return {idsArray,seatNumber}
 };
 
@@ -40,13 +33,11 @@ function checkRowWise(arr, rows, slot) {
   let end = null;
   let start = null;
   let count  = 0
-  console.log(rows)
   for (let i = 0; i <= arr.length - slot; i++) {
     if(rows[rowsIndex]===0){
       console.log("0")
       rowsIndex++
     }
-    console.log(rowsIndex)
     if (rows[rowsIndex] >= slot) {
       let diff = arr[(i + slot - 1)].seatNo - arr[i].seatNo;
       if (diff < min) {

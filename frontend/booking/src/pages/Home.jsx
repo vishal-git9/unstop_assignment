@@ -27,6 +27,15 @@ export const Home = () => {
             return;
         }
         const res = await getUnbookedData()
+        if(res.length<TicketCount){
+            toast({
+                position:"top",
+                duration:"3000",
+                status:"error",
+                description:`only ${res.length} seats are left`
+            })
+            return;
+        }
         const {idsArray,seatNumber} =  closeBook(res,TicketCount)
         dispatch(bookTicketsAction(idsArray))
         setTicketCount("")
