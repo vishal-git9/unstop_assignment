@@ -36,7 +36,7 @@ export const ticketReducer = (state=intialState,{type,payload})=>{
         }
         case PATCH_TICKETS_SUCCESS:{
             return{
-                ...state,loading:false,error:false
+                ...state,loading:false,error:false,tickets:payload
             }
         }
         case RESET_TICKETS_SUCCESS:{

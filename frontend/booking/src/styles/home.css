@@ -4,5 +4,13 @@
     align-items: center;
     flex-direction: column;
     gap: 30px;
-    height: 60vh;
+    height: 100%;
+}
+
+.Home_css_parent_container{
+    display: flex;
+    width: 90%;
+    margin: auto;
+    flex-direction: column;
+    gap: 50px;
 }

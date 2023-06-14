@@ -7,8 +7,7 @@ import { getTicketsAction, resetTicketsAction } from '../redux/tickets/tickets.a
 export const Bookings = () => {
 
   const dispatch = useDispatch()
-  const ticketsData = useSelector((store)=>store.tickets)
-  const loading = useSelector((store)=>store.loading)
+  const {tickets,loading} = useSelector((store)=>store)
   const handleReset = ()=>{
     dispatch(resetTicketsAction())
   }
@@ -19,13 +18,13 @@ export const Bookings = () => {
     <Container display={"flex"} gap={"30px"} flexDirection={"column"} pb={10}>
         <Heading>Seats</Heading>
         <HStack justifyContent={"center"}>
-        <Box width={50} height={50} bgColor={"green"} fontSize={"sm"}></Box>
+        <Box width={"20px"} height={"20px"} bgColor={"green"} fontSize={"sm"}></Box>
         <Text>Booked</Text>
-        <Box width={50} height={50} border={"1px solid #9AC6CF "}></Box>
+        <Box width={"20px"} height={"20px"} border={"1px solid #9AC6CF "}></Box>
         <Text>Not Booked</Text>
         </HStack>
         {
-          loading ? <Center><Spinner/></Center> : <Seats data={ticketsData}/>
+          loading ? <Center><Spinner/></Center> : <Seats data={tickets}/>
         }
         <Button onClick={handleReset}>RESET TICKETS</Button>
     </Container>

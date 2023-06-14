@@ -15,6 +15,7 @@ const NavLink = ({ children,href,active }) => (
     px={2}
     py={1}
     rounded={'md'}
+    _selected={{bgColor:"red"}}
     _hover={{
       textDecoration: 'none',
       bg: useColorModeValue('gray.200', 'gray.700'),
@@ -33,7 +34,6 @@ export default function Nav() {
           <Box>FastBook</Box>
           <HStack gap={100}>
           <NavLink href={"/"}>Home</NavLink>
-          <NavLink href={"/book"}>Bookings</NavLink>
           </HStack>
           <Flex alignItems={'center'}>
             <Stack direction={'row'} spacing={7}>

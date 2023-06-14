@@ -5,7 +5,7 @@ export const closeBook = (data, slot) => {
   for (let i = 0; i < data.length; i++) {
     rowArr[Math.ceil(data[i].seatNo/7)]++
   }
-
+  console.log(rowArr)
   let {start,end} = checkRowWise(data,rowArr,slot)
   if(start===null || end === null){
     let {start,end}  = checkCloser(data,slot)
@@ -34,7 +34,7 @@ function checkRowWise(arr, rows, slot) {
   let start = null;
   let count  = 0
   for (let i = 0; i <= arr.length - slot; i++) {
-    if(rows[rowsIndex]===0){
+    while(rows[rowsIndex]===0){
       console.log("0")
       rowsIndex++
     }
@@ -54,7 +54,7 @@ function checkRowWise(arr, rows, slot) {
       }
     }
   }
-
+  console.log(start,end)
   return {start,end}
 
 }

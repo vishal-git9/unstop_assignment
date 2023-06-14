@@ -16,7 +16,8 @@ export const getTicketsAction = ()=>async(dispatch)=>{
 export const bookTicketsAction = (data)=>async(dispatch)=>{
     dispatch({type:PATCH_TICKETS_LOADING})
     try {
-        const payload = await bookTicketSeatsData(data)
+        await bookTicketSeatsData(data)
+        const payload = await getTicketSeatsData()
         dispatch({type:PATCH_TICKETS_SUCCESS,payload})
     } catch (error) {
         dispatch({type:PATCH_TICKETS_ERROR})
