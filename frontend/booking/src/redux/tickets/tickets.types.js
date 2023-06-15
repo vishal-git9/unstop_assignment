@@ -1,3 +1,5 @@
+
+// types for different tickets actions
 export const GET_TICKETS_LOADING  = "GET_TICKETS_LOADING"
 export const GET_TICKETS_ERROR  = "GET_TICKETS_ERROR"
 export const GET_TICKETS_SUCCESS  = "GET_TICKETS_SUCCESS"

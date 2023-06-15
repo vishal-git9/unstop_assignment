@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import { Input } from '../components/input'
 import "../styles/home.css"
 import {Heading, Text, useToast } from '@chakra-ui/react'
@@ -8,17 +8,16 @@ import { closeBook } from '../logic_functions/booking'
 import { bookTicketsAction } from '../redux/tickets/tickets.actions'
 import { Bookings } from './Bookings'
 export const Home = () => {
-    const [TicketCount,setTicketCount] = useState(0)
-    const [seats,setSeats] = useState("")
-    const [book,setBook] = useState(false)
-    const {error} = useSelector((store)=>store)
+    const [TicketCount,setTicketCount] = useState(0) // user input ticket count
+    const [seats,setSeats] = useState("") // seats that are booked by the system for the user
+    const {error} = useSelector((store)=>store) // reading error from store during api call
     const toast = useToast()
     const dispatch = useDispatch()
     const handleTicketCount = (e)=>{
         setTicketCount(Number(e.target.value))
     }
     const handleTicketSubmit = async(e)=>{
-        if(TicketCount>7 || TicketCount<=0){
+        if(TicketCount>7 || TicketCount<=0){ // handling the input edge cases
             toast({
                 position:"top",
                 duration:"3000",
@@ -27,8 +26,8 @@ export const Home = () => {
             })
             return;
         }
-        const res = await getUnbookedData()
-        if(res.length<TicketCount){
+        const res = await getUnbookedData() // calling the api to get the unbooked seats
+        if(res.length<TicketCount){ // if seats are lesser than asked by the user we show a popup
             toast({
                 position:"top",
                 duration:"3000",
@@ -37,19 +36,18 @@ export const Home = () => {
             })
             return;
         }
-        const {idsArray,seatNumber} =  closeBook(res,TicketCount)
-        dispatch(bookTicketsAction(idsArray))
-        setTicketCount("")
-        setSeats(seatNumber)
-        setBook(!book)
-        if(error){
+        const {idsArray,seatNumber} =  closeBook(res,TicketCount) // else we call the api to book the closest ticket
+        dispatch(bookTicketsAction(idsArray)) // dispatching the actions of booking the tickets of given id
+        setTicketCount("") // emptying the value
+        setSeats(seatNumber) // storing the seat numbers
+        if(error){ // error popup
             toast({
                 position:"top",
                 duration:"3000",
                 status:"error",
                 description:"Please try later server is not responding"
             })
-        }else{
+        }else{ // success popup
             toast({
                 position:"top",
                 duration:"3000",
@@ -58,8 +56,6 @@ export const Home = () => {
             })
         }
     }
-    useEffect(()=>{
-    },[dispatch])
   return (
     <div className='Home_css_parent_container'>
     <div className='Home_css_container'>

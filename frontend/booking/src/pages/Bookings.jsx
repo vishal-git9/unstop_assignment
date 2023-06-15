@@ -7,12 +7,12 @@ import { getTicketsAction, resetTicketsAction } from '../redux/tickets/tickets.a
 export const Bookings = () => {
 
   const dispatch = useDispatch()
-  const {tickets,loading} = useSelector((store)=>store)
+  const {tickets,loading} = useSelector((store)=>store) // reading the value from the redux store
   const handleReset = ()=>{
-    dispatch(resetTicketsAction())
+    dispatch(resetTicketsAction()) // dispatching the reset tickets action
   }
   useEffect(()=>{
-    dispatch(getTicketsAction())
+    dispatch(getTicketsAction()) // dispatching the get tickets action for tickets data
   },[dispatch])
   return (
     <Container display={"flex"} gap={"30px"} flexDirection={"column"} pb={10}>

@@ -26,7 +26,7 @@ const NavLink = ({ children,href,active }) => (
 );
 
 export default function Nav() {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode(); // toggle the color theme of page
   return (
     <>
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
