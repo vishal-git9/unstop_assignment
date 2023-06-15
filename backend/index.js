@@ -8,15 +8,15 @@ app.use(cors())
 app.use(express.json())
 
 
-app.use("/api/",bookingRouter)
+app.use("/api/",bookingRouter) // api endpoint for booking tickets
 
 app.listen(`${process.env.PORT}`,async()=>{
     try {
-        await connection
+        await connection // making connection to db
         console.log("connected to db")
     } catch (error) {
         console.log("couldn't connect to db")
     }
 
-    console.log(`connected to port ${process.env.PORT}`)
+    console.log(`connected to port ${process.env.PORT}`) // running on port
 })
